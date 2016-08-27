@@ -1,13 +1,13 @@
 {
-  "name": "aframe-react-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate for using A-Frame with React.",
+  "name": "mathvr",
+  "version": "0.1.0",
+  "description": "Math in VR.",
   "dependencies": {
     "aframe": "^0.3.1",
     "aframe-react": "git+https://git@github.com/michaltakac/aframe-react.git",
     "babel-polyfill": "^6.3.14",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   },
   "scripts": {
     "build": "webpack",
@@ -18,23 +18,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ngokevin/aframe-react-boilerplate.git"
+    "url": "git+https://github.com/DimensionLab/mathvr.git"
   },
   "keywords": [
     "aframe",
     "react",
     "vr",
-    "boilerplate",
+    "math",
     "a-frame",
     "mozvr",
     "webvr"
   ],
-  "author": "Kevin Ngo <kngo@mozilla.com>",
+  "author": "Michal Takac <hello@michaltakac.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ngokevin/aframe-react-boilerplate/issues"
+    "url": "https://github.com/DimensionLab/mathvr/issues"
   },
-  "homepage": "https://github.com/ngokevin/aframe-react-boilerplate#readme",
+  "homepage": "https://github.com/DimensionLab/mathvr#readme",
   "devDependencies": {
     "babel": "^6.3.13",
     "babel-core": "^6.3.15",
