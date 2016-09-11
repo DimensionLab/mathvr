@@ -4,8 +4,14 @@
   "description": "Math in VR.",
   "dependencies": {
     "aframe": "^0.3.1",
+    "aframe-extras": "^2.4.0",
+    "aframe-gridhelper-component": "^0.1.1",
+    "aframe-keyboard": "0.0.1",
+    "aframe-look-at-component": "^0.1.2",
     "aframe-react": "git+https://git@github.com/michaltakac/aframe-react.git",
+    "aframe-sprite-component": "^0.1.0",
     "babel-polyfill": "^6.3.14",
+    "mathbox": "^0.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   },
@@ -48,6 +54,7 @@
     "json-loader": "^0.5.4",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9",
+    "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "^1.14.0"
   }
 }
