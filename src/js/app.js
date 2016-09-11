@@ -20,7 +20,7 @@ import Camera from './components/Camera';
 import Cursor from './components/Cursor';
 import Sky from './components/Sky';
 
-import './mathbox';
+// import './mathbox';
 
 class BoilerplateScene extends React.Component {
   constructor(props) {
@@ -44,11 +44,12 @@ class BoilerplateScene extends React.Component {
       <Scene stats gridhelper>
 
         <a-assets>
-          <a-mixin id="red" line="color: #E20049"></a-mixin>
+          <a-mixin id="blue" line="color: blue"></a-mixin>
         </a-assets>
 
         <Camera
-          position="0 1.8 0"
+          position="5 1.8 5"
+          rotation="-8.5 43 0"
           orbit-controls="
             autoRotate: true;
             target: #target;
@@ -69,16 +70,14 @@ class BoilerplateScene extends React.Component {
         <Entity hand-controls="hand: left" />
         <Entity hand-controls="hand: right" />
 
-        <Entity ui-modal visible="false">
+        {/*<Entity ui-modal visible="false">
           <a-plane width="3" height="1" color="red" position="0 -1.2 0"></a-plane>
           <a-plane width="3" height="1" color="green" position="0 0 0"></a-plane>
           <a-plane width="3" height="1" color="blue" position="0 1.2 0"></a-plane>
-        </Entity>
+        </Entity>*/}
 
-        <Entity id="happy-face" position="0 2 -10">
-          <Entity mixin="red" line="path: -1 1 0, -1 0.5 0, -1 0 0" />
-          <Entity mixin="red" line="path: 1 1 0, 1 0.5 0, 1 0 0" />
-          <Entity mixin="red" line="path: -2 -1 0, 0 -2 0, 2 -1" />
+        <Entity id="z-axis" position="0 0 0">
+          <Entity mixin="blue" line="path: 0 -5 0, 0 5 0" />
         </Entity>
 
         <Entity light={{type: 'ambient', color: '#888'}}/>

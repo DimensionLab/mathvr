@@ -15,7 +15,7 @@ export default props => {
   };
   console.log(props);
   return (
-    <Entity cursor={props.cursor} geometry={geometry} material={material} position="0 0 -1">
+    <Entity cursor={props} geometry={geometry} material={material} position="0 0 -1">
       <Animation attribute="scale" begin="click" dur="150" fill="backwards"
                  to="0 0 0"/>
     </Entity>
