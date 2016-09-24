@@ -21,7 +21,7 @@
     "ghpages": "npm run preghpages && ghpages -p gh-pages",
     "gh-pages": "npm run ghpages",
     "start": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot --host 0.0.0.0 --port 9090",
-    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true npm run serve",
+    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true && npm run start",
     "lint:eslint": "./node_modules/.bin/eslint src || true"
   },
   "repository": {
@@ -56,6 +56,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "babel-runtime": "^6.3.13",
+    "cross-env": "^3.0.0",
     "css-loader": "^0.23.0",
     "enzyme": "^2.4.1",
     "eslint": "^3.6.0",
@@ -146,7 +147,10 @@
       "prefer-template": 2,
       "class-methods-use-this": 0,
       "react/forbid-prop-types": 0,
-      "react/jsx-first-prop-new-line": [2, "multiline"],
+      "react/jsx-first-prop-new-line": [
+        2,
+        "multiline"
+      ],
       "react/jsx-filename-extension": 0,
       "react/jsx-no-target-blank": 0,
       "react/require-extension": 0,
