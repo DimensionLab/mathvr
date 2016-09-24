@@ -1,18 +1,18 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 require('babel-polyfill');
 
-var IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-var ENTRY_POINTS = [
-  './src/js/app'
+const ENTRY_POINTS = [
+  './src/js/app',
 ];
 
-var JS_LOADERS = [
-  'babel?cacheDirectory&presets[]=react,presets[]=es2015,presets[]=stage-0'
+const JS_LOADERS = [
+  'babel?cacheDirectory&presets[]=react,presets[]=es2015,presets[]=stage-0',
 ];
 
-var PLUGINS = [];
+const PLUGINS = [];
 if (IS_PRODUCTION) {
   // Uglify in production.
   PLUGINS.push(
