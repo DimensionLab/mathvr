@@ -19,7 +19,7 @@
     "build": "webpack",
     "preghpages": "npm run build && rm -rf gh-pages && cp -r src gh-pages && cp index.html build/bundle.js gh-pages",
     "ghpages": "npm run preghpages && ghpages -p gh-pages",
-    "gh-pages": "npm run ghpages",
+    "deploy": "npm run ghpages",
     "start": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot --host 0.0.0.0 --port 9090",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true && npm run start",
     "lint:eslint": "./node_modules/.bin/eslint src || true"
