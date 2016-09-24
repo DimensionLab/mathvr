@@ -18,9 +18,9 @@ if (IS_PRODUCTION) {
   PLUGINS.push(
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
-          except: ['$super', '$', 'exports', 'require']
+        except: ['$super', '$', 'exports', 'require'],
       },
-      sourcemap: false
+      sourcemap: false,
     })
   );
 }
@@ -35,6 +35,10 @@ module.exports = {
     publicPath: '/',
   },
   module: {
+    noParse: [
+      /node_modules\/aframe\/dist\/aframe.js/,
+      /node_modules\/cannon\/build\/cannon.js/,
+    ],
     loaders: [
       {
         // JS.
@@ -44,12 +48,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
-      }
+        loader: 'json-loader',
+      },
     ],
   },
   plugins: PLUGINS,
@@ -59,9 +63,9 @@ module.exports = {
     modulesDirectories: [
       'src/js',
       'node_modules',
-    ]
+    ],
   },
   resolveLoader: {
-    fallback: [path.join(__dirname, 'node_modules')]
-  }
+    fallback: [path.join(__dirname, 'node_modules')],
+  },
 };
