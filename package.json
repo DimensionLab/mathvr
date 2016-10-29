@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Math in VR.",
   "dependencies": {
-    "aframe": "^0.3.1",
+    "aframe": "^0.3.2",
     "aframe-extras": "^2.4.0",
     "aframe-gridhelper-component": "^0.1.1",
     "aframe-keyboard": "0.0.1",
@@ -11,7 +11,7 @@
     "aframe-react": "git+https://git@github.com/michaltakac/aframe-react.git",
     "aframe-sprite-component": "^0.1.0",
     "babel-polyfill": "^6.3.14",
-    "mathbox": "^0.1.0",
+    "mathbox": "git+https://git@gitgud.io/michaltakac/mathbox.git",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   },
@@ -64,9 +64,11 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
+    "file-loader": "^0.9.0",
     "ghpages": "0.0.3",
     "json-loader": "^0.5.4",
     "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
     "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "^1.14.0"

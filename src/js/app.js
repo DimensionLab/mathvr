@@ -1,17 +1,18 @@
 // A-Frame
 import 'aframe';
 // Aframe React
-import { Animation, Entity, Scene } from 'aframe-react';
+import { Entity, Scene } from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import extras from 'aframe-extras';
 
 // Components form NPM
-import 'aframe-gridhelper-component';
 import 'aframe-sprite-component';
 import 'aframe-look-at-component';
 // Local aframe components
-import './aframe-components/line';
+//import './aframe-components/interval';
+import './aframe-components/three-function';
+import './aframe-components/grid';
 import './aframe-components/ui-modal';
 
 import 'babel-polyfill';
@@ -21,8 +22,6 @@ import Cursor from './components/Cursor';
 import Sky from './components/Sky';
 
 extras.registerAll();
-
-// import './mathbox';
 
 class BoilerplateScene extends React.Component {
   constructor(props) {
@@ -43,7 +42,7 @@ class BoilerplateScene extends React.Component {
 
   render() {
     return (
-      <Scene stats gridhelper>
+      <Scene grid>
 
         <a-assets>
           <a-mixin id="blue" line="color: blue"></a-mixin>
@@ -69,14 +68,18 @@ class BoilerplateScene extends React.Component {
 
         <Sky />
 
+        {/* <a-mb-interval position="0 0 0"></a-mb-interval> */}
+
+        <Entity three-function rotation="0 0 0" position="0 0 0"></Entity>
+
         <Entity hand-controls="hand: left" />
         <Entity hand-controls="hand: right" />
 
-        <Entity ui-modal visible="false">
+        {/* <Entity ui-modal visible="false">
           <a-plane width="3" height="1" color="red" position="0 -1.2 0"></a-plane>
           <a-plane width="3" height="1" color="green" position="0 0 0"></a-plane>
           <a-plane width="3" height="1" color="blue" position="0 1.2 0"></a-plane>
-        </Entity>
+        </Entity> */}
 
         <Entity id="z-axis" position="0 0 0">
           <Entity mixin="blue" line="path: 0 -5 0, 0 5 0" />
@@ -88,13 +91,12 @@ class BoilerplateScene extends React.Component {
 
         <Entity
           id="target"
-          geometry="primitive: box"
+          geometry="primitive: sphere"
           material={{ color: this.state.color }}
           onClick={e => this.changeColor(e)}
           position="0 0 -5"
-        >
-          <Animation attribute="rotation" dur="5000" repeat="indefinite" to="0 360 360" />
-        </Entity>
+          interval
+        />
       </Scene>
     );
   }
