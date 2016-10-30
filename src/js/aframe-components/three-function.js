@@ -11,7 +11,7 @@ let graphMesh;
 
 AFRAME.registerComponent('three-function', {
   schema: {
-    equation: { default: 'x^2 - y^2' },
+    equation: { default: 'f(x,y) = x^2 + y^2' },
     segments: { default: 20 },
     xMin: { default: -5 },
     xMax: { default: 5 },
@@ -28,35 +28,45 @@ AFRAME.registerComponent('three-function', {
   },
 
   init() {
-    const scene = this.el.object3D;
-    const data = this.data;
-
-    // Equation parser
-    const equation = `f(x, y) = ${data.equation}`;
-    parser.eval(equation);
-    let f1 = parser.get('f');
-    parser.clear();
-
-    let segments = data.segments;
-
-    let xMin = data.xMin;
-    let xMax = data.xMax;
-    let yMin = data.yMin;
-    let yMax = data.yMax;
-    let zMin = data.zMin;
-    let zMax = data.zMax;
-
-    let xRange = xMax - xMin;
-    let yRange = yMax - yMin;
-    let zRange = zMax - zMin;
-
     // "wireframe texture"
     const loader = new THREE.TextureLoader();
     const wireTexture = loader.load(squareImage);
     wireTexture.wrapS = wireTexture.wrapT = THREE.RepeatWrapping;
     wireTexture.repeat.set( 40, 40 );
-    const wireMaterial = new THREE.MeshBasicMaterial( { map: wireTexture, vertexColors: THREE.VertexColors, side:THREE.DoubleSide } );
-    const vertexColorMaterial  = new THREE.MeshBasicMaterial( { vertexColors: THREE.VertexColors } );
+    this.wireMaterial = new THREE.MeshBasicMaterial( { map: wireTexture, vertexColors: THREE.VertexColors, side:THREE.DoubleSide } );
+    this.vertexColorMaterial  = new THREE.MeshBasicMaterial( { vertexColors: THREE.VertexColors } );
+  },
+
+  tick(t, dt) {
+    const data = this.data;
+
+    if (data.animation && data.animationType === 'rotation') {
+      graphMesh.rotation.x += data.animateXBy;
+      graphMesh.rotation.y += data.animateYBy;
+      graphMesh.rotation.z += data.animateZBy;
+    }
+  },
+
+  update(oldData) {
+    const scene = this.el.object3D;
+    // Equation parser
+    const equation = this.data.equation;
+    parser.eval(equation);
+    let f1 = parser.get('f');
+    parser.clear();
+
+    let segments = this.data.segments;
+
+    let xMin = this.data.xMin;
+    let xMax = this.data.xMax;
+    let yMin = this.data.yMin;
+    let yMax = this.data.yMax;
+    let zMin = this.data.zMin;
+    let zMax = this.data.zMax;
+
+    let xRange = xMax - xMin;
+    let yRange = yMax - yMin;
+    let zRange = zMax - zMin;
 
     xRange = xMax - xMin;
     yRange = yMax - yMin;
@@ -120,21 +130,11 @@ AFRAME.registerComponent('three-function', {
       scene.remove( graphMesh );
       // renderer.deallocateObject( graphMesh );
     }
-    wireMaterial.map.repeat.set( segments, segments );
+    this.wireMaterial.map.repeat.set( segments, segments );
 
-    graphMesh = new THREE.Mesh( graphGeometry, wireMaterial );
+    graphMesh = new THREE.Mesh( graphGeometry, this.wireMaterial );
     graphMesh.doubleSided = true;
     scene.add(graphMesh);
-  },
-
-  tick(t, dt) {
-    const data = this.data;
-
-    if (data.animation && data.animationType === 'rotation') {
-      graphMesh.rotation.x += data.animateXBy;
-      graphMesh.rotation.y += data.animateYBy;
-      graphMesh.rotation.z += data.animateZBy;
-    }
   },
 
   remove() {
