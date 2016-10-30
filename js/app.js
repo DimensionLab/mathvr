@@ -9,6 +9,10 @@ import 'aframe-text-component';
 import './aframe-components/three-function';
 import './aframe-components/grid';
 import './aframe-components/ui-modal';
+import './aframe-components/orbit-controls';
+import './aframe-components/if-no-vr-headset';
+import './aframe-components/look-controls-alt';
+// import './aframe-components/controller';
 
 import 'babel-polyfill';
 // Aframe React
@@ -21,6 +25,9 @@ import Camera from './components/Camera';
 import Sky from './components/Sky';
 import Text from './components/Text';
 
+// Plugins
+import '../../vendor/OrbitControls';
+
 extras.registerAll();
 
 class VRScene extends React.Component {
@@ -30,7 +37,29 @@ class VRScene extends React.Component {
       color: 'orange',
       animation: false,
       equation: 'f(x,y) = x^2 + y^2',
+      headsetAvailable: false,
     };
+  }
+
+  componentWillMount() {
+    const self = this;
+    // Check VRDisplays to determine if headset is connected.
+    navigator.getVRDisplays().then((displays) => {
+      if (displays.length > 0) self.setState({ headsetAvailable: true });
+    });
+  }
+
+  componentDidMount() {
+    const self = this;
+    document.querySelector('#left-hand').addEventListener('buttondown', (e) => {
+      if (e.detail.id === 1) {
+        self.changeColorAndEquation();
+      }
+
+      if (e.detail.id === 0) {
+        self.toggleAnimation();
+      }
+    });
   }
 
   changeColorAndEquation() {
@@ -65,22 +94,19 @@ class VRScene extends React.Component {
           <a-mixin id="blue" line="color: blue"></a-mixin>
         </a-assets>
 
-        <Camera
-          position="2 1.8 3"
-          rotation="-8.5 35 0"
-          orbit-controls={{
-            autoRotate: true,
-            target: '#target',
-            enableDamping: true,
-            dampingFactor: 0.125,
-            rotateSpeed: 0.25,
-            minDistance: 3,
-            maxDistance: 100,
-          }}
-          universal-controls
-        >
-          <a-cursor animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"></a-cursor>
-        </Camera>
+        {
+          this.state.headsetAvailable ?
+            <Camera look-controls-alt orbit-controls></Camera>
+          :
+            <Camera
+              position="2 1.8 3"
+              rotation="-8.5 35 0"
+              look-controls
+              universal-controls
+            >
+              <a-cursor animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"></a-cursor>
+            </Camera>
+        }
 
         <Sky />
 
@@ -122,8 +148,22 @@ class VRScene extends React.Component {
           scale="1 1 1"
         ></Entity>
 
-        <Entity vive-controls="hand: left" raycaster="objects: .collidable" />
-        <Entity vive-controls="hand: right" raycaster="objects: .collidable" />
+        <Entity
+          id="left-hand"
+          controller="hand: left"
+          onClick={() => this.changeColorAndEquation()}
+          if-no-vr-headset="visible: false"
+          vive-controls="hand: left"
+          raycaster="objects: .collidable"
+        />
+        <Entity
+          id="right-hand"
+          controller="hand: right"
+          onClick={() => this.changeColorAndEquation()}
+          if-no-vr-headset="visible: false"
+          vive-controls="hand: right"
+          raycaster="objects: .collidable"
+        />
 
         {/*<Entity ui-modal={{ trigger: 'keyup' }} visible="false">
           <a-plane width="3" height="1" color="red" position="0 -1.2 0" onClick={() => this.toggleAnimation()}></a-plane>
@@ -145,7 +185,8 @@ class VRScene extends React.Component {
           geometry="primitive: sphere"
           material={{ color: this.state.color }}
           onClick={() => this.changeColorAndEquation()}
-          position="0 0 -5"
+          position="0 0.5 -5"
+          scale=".5 .5 .5"
         />
 
         <Text
@@ -163,7 +204,8 @@ class VRScene extends React.Component {
           geometry="primitive: sphere"
           material={{ color: 'orange' }}
           onClick={() => this.toggleAnimation()}
-          position="-4 0 0"
+          position="-4 0.5 0"
+          scale=".5 .5 .5"
         />
 
       </Scene>
