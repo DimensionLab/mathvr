@@ -1,19 +1,19 @@
 {
   "name": "mathvr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Math in VR.",
   "dependencies": {
     "aframe": "^0.3.2",
     "aframe-extras": "^2.4.0",
-    "aframe-gridhelper-component": "^0.1.1",
+    "aframe-bmfont-text-component": "^0.1.4",
     "aframe-keyboard": "0.0.1",
     "aframe-look-at-component": "^0.1.2",
-    "aframe-react": "git+https://git@github.com/michaltakac/aframe-react.git",
+    "aframe-react": "^3.4.0",
     "aframe-sprite-component": "^0.1.0",
+    "aframe-text-component": "^0.3.0",
     "babel-polyfill": "^6.3.14",
     "mathbox": "git+https://git@gitgud.io/michaltakac/mathbox.git",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "mathjs": "^3.6.0"
   },
   "scripts": {
     "build": "webpack",
@@ -21,7 +21,6 @@
     "ghpages": "npm run preghpages && ghpages -p gh-pages",
     "deploy": "npm run ghpages",
     "start": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot --host 0.0.0.0 --port 9090",
-    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true && npm run start",
     "lint:eslint": "./node_modules/.bin/eslint src || true"
   },
   "repository": {
