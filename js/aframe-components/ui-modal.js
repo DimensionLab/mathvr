@@ -12,6 +12,7 @@ AFRAME.registerComponent('ui-modal', {
   },
 
   init() {
+    console.log(this.data.trigger);
     document.querySelector('a-scene').addEventListener(this.data.trigger, this.eventHandler.bind(this));
 
     this.cameraEl = document.querySelector('a-entity[camera]');
@@ -27,6 +28,7 @@ AFRAME.registerComponent('ui-modal', {
   },
 
   eventHandler(evt) { // eslint-disable-line no-unused-vars
+    console.log(evt);
     if (this.el.getAttribute('visible') === false) {
       const direction = this.zaxis.clone();
       direction.applyQuaternion(this.cameraEl.object3D.quaternion);
