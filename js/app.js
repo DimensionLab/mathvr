@@ -29,13 +29,25 @@ class VRScene extends React.Component {
     this.state = {
       color: 'orange',
       animation: false,
+      equation: 'f(x,y) = x^2 + y^2',
     };
   }
 
-  changeColor() {
+  changeColorAndEquation() {
     const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+    const equations = [
+      'f(x,y) = x^2 + y^2',
+      'f(x,y) = x^2 - y^2',
+      'f(x,y) = x^3 + y^3',
+      'f(x,y) = x^3 - y^3',
+      'f(x,y) = x^2 * y^2',
+    ];
+
+    const randomNumber = Math.floor(Math.random() * colors.length);
+
     this.setState({
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[randomNumber],
+      equation: equations[randomNumber],
     });
   }
 
@@ -54,8 +66,8 @@ class VRScene extends React.Component {
         </a-assets>
 
         <Camera
-          position="5 1.8 5"
-          rotation="-8.5 43 0"
+          position="2 1.8 3"
+          rotation="-8.5 35 0"
           orbit-controls={{
             autoRotate: true,
             target: '#target',
@@ -73,9 +85,19 @@ class VRScene extends React.Component {
         <Sky />
 
         <Text
-          text="f(x,y) = x^2 + y^2"
+          text={this.state.equation}
           color={this.state.color}
-          position="-1.75 2 -3"
+          align="center"
+          position="-1.2 2 -5"
+          scale=".6 .6 .6"
+        />
+
+        <Text
+          text="Click on sphere to show random function"
+          color="#DADADA"
+          align="center"
+          position="-2 1.3 -5"
+          scale=".4 .4 .4"
         />
 
         {/* <a-mb-interval position="0 0 0"></a-mb-interval> */}
@@ -83,7 +105,7 @@ class VRScene extends React.Component {
         {/* Three.js math function */}
         <Entity
           three-function={{
-            equation: 'x^2 + y^2',
+            equation: this.state.equation,
             segments: 100,
             xMin: -1,
             xMax: 1,
@@ -103,11 +125,11 @@ class VRScene extends React.Component {
         <Entity vive-controls="hand: left" raycaster="objects: .collidable" />
         <Entity vive-controls="hand: right" raycaster="objects: .collidable" />
 
-        <Entity ui-modal={{ trigger: 'keyup' }} visible="false">
+        {/*<Entity ui-modal={{ trigger: 'keyup' }} visible="false">
           <a-plane width="3" height="1" color="red" position="0 -1.2 0" onClick={() => this.toggleAnimation()}></a-plane>
           <a-plane width="3" height="1" color="green" position="0 0 0"></a-plane>
           <a-plane width="3" height="1" color="blue" position="0 1.2 0"></a-plane>
-        </Entity>
+        </Entity>*/}
 
         <Entity id="z-axis" position="0 0 0">
           <Entity mixin="blue" line="path: 0 -5 0, 0 5 0" />
@@ -122,14 +144,17 @@ class VRScene extends React.Component {
           id="target"
           geometry="primitive: sphere"
           material={{ color: this.state.color }}
-          onClick={() => this.changeColor()}
+          onClick={() => this.changeColorAndEquation()}
           position="0 0 -5"
         />
 
         <Text
           text="Click on sphere to toggle animation"
           color="#DADADA"
-          position="5 2 4"
+          align="center"
+          position="-4 1.4 2"
+          rotation="0 90 0"
+          scale=".3 .3 .3"
         />
 
         <Entity
@@ -138,7 +163,7 @@ class VRScene extends React.Component {
           geometry="primitive: sphere"
           material={{ color: 'orange' }}
           onClick={() => this.toggleAnimation()}
-          position="5 0 4"
+          position="-4 0 0"
         />
 
       </Scene>
