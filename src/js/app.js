@@ -51,12 +51,14 @@ class VRScene extends React.Component {
 
   componentDidMount() {
     const self = this;
-    document.querySelector('#left-hand').addEventListener('buttondown', (e) => {
+    document.querySelector('#right-hand').addEventListener('buttondown', (e) => {
       if (e.detail.id === 1) {
         self.changeColorAndEquation();
       }
+    });
 
-      if (e.detail.id === 0) {
+    document.querySelector('#left-hand').addEventListener('buttondown', (e) => {
+      if (e.detail.id === 1) {
         self.toggleAnimation();
       }
     });
@@ -151,7 +153,6 @@ class VRScene extends React.Component {
         <Entity
           id="left-hand"
           controller="hand: left"
-          onClick={() => this.changeColorAndEquation()}
           if-no-vr-headset="visible: false"
           vive-controls="hand: left"
           raycaster="objects: .collidable"
@@ -159,7 +160,6 @@ class VRScene extends React.Component {
         <Entity
           id="right-hand"
           controller="hand: right"
-          onClick={() => this.changeColorAndEquation()}
           if-no-vr-headset="visible: false"
           vive-controls="hand: right"
           raycaster="objects: .collidable"
