@@ -1,7 +1,6 @@
 # Change Log
 
-## [Unreleased](https://github.com/DimensionLab/mathvr/tree/HEAD)
-
+## [v0.1.5](https://github.com/DimensionLab/mathvr/tree/v0.1.5) (2016-10-31)
 **Implemented enhancements:**
 
 - Add changelog [\#3](https://github.com/DimensionLab/mathvr/issues/3)
