@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased](https://github.com/DimensionLab/mathvr/tree/HEAD)
+
+[Full Changelog](https://github.com/DimensionLab/mathvr/compare/v0.1.5...HEAD)
+
+**Implemented enhancements:**
+
+- Use teleportation component [\#2](https://github.com/DimensionLab/mathvr/issues/2)
+
 ## [v0.1.5](https://github.com/DimensionLab/mathvr/tree/v0.1.5) (2016-10-31)
 **Implemented enhancements:**
 
