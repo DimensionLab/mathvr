@@ -1,9 +1,13 @@
+/* global navigator */
 // A-Frame
 import 'aframe';
+
 // Components form NPM
 import 'aframe-sprite-component';
 import 'aframe-look-at-component';
 import 'aframe-text-component';
+import 'aframe-teleport-controls';
+
 // Local aframe components
 // import './aframe-components/interval';
 import './aframe-components/three-function';
@@ -15,6 +19,7 @@ import './aframe-components/look-controls-alt';
 // import './aframe-components/controller';
 
 import 'babel-polyfill';
+
 // Aframe React
 import { Entity, Scene } from 'aframe-react';
 import React from 'react';
@@ -152,6 +157,7 @@ class VRScene extends React.Component {
 
         <Entity
           id="left-hand"
+          teleport-controls
           controller="hand: left"
           if-no-vr-headset="visible: false"
           vive-controls="hand: left"
@@ -165,11 +171,11 @@ class VRScene extends React.Component {
           raycaster="objects: .collidable"
         />
 
-        {/*<Entity ui-modal={{ trigger: 'keyup' }} visible="false">
+        {/* <Entity ui-modal={{ trigger: 'keyup' }} visible="false">
           <a-plane width="3" height="1" color="red" position="0 -1.2 0" onClick={() => this.toggleAnimation()}></a-plane>
           <a-plane width="3" height="1" color="green" position="0 0 0"></a-plane>
           <a-plane width="3" height="1" color="blue" position="0 1.2 0"></a-plane>
-        </Entity>*/}
+        </Entity> */}
 
         <Entity id="z-axis" position="0 0 0">
           <Entity mixin="blue" line="path: 0 -5 0, 0 5 0" />
