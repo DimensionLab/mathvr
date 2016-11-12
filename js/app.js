@@ -137,7 +137,7 @@ class VRScene extends React.Component {
 
         {/* Three.js math function */}
         <Entity
-          three-function={{
+          mathbox-function={{
             equation: this.state.equation,
             segments: 100,
             xMin: -1,
